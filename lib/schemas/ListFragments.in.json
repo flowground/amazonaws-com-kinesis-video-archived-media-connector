@@ -1,0 +1,105 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "FragmentSelector": {
+                    "description": "Describes the timestamp range and timestamp origin for the range of fragments to return.",
+                    "properties": {
+                        "FragmentSelectorType": {
+                            "description": "The origin of the timestamps to use (Server or Producer).",
+                            "enum": [
+                                "PRODUCER_TIMESTAMP",
+                                "SERVER_TIMESTAMP"
+                            ],
+                            "type": "string"
+                        },
+                        "TimestampRange": {
+                            "description": "The range of timestamps to return.",
+                            "properties": {
+                                "EndTimestamp": {
+                                    "description": "The ending timestamp in the range of timestamps for which to return fragments.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                },
+                                "StartTimestamp": {
+                                    "description": "The starting timestamp in the range of timestamps for which to return fragments.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "StartTimestamp",
+                                "EndTimestamp"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "FragmentSelectorType",
+                        "TimestampRange"
+                    ],
+                    "type": "object"
+                },
+                "MaxResults": {
+                    "description": "The total number of fragments to return. If the total number of fragments available is more than the value specified in <code>max-results</code>, then a <a>ListFragmentsOutput$NextToken</a> is provided in the output that you can use to resume pagination.",
+                    "maximum": 1000,
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "NextToken": {
+                    "description": "A token to specify where to start paginating. This is the <a>ListFragmentsOutput$NextToken</a> from a previously truncated response.",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "StreamName": {
+                    "description": "The name of the stream from which to retrieve a fragment list.",
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "pattern": "[a-zA-Z0-9_.-]+",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "StreamName"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}
